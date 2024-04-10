@@ -1,0 +1,4 @@
+upload_max_filesize=200M
+post_max_size=900M
+memory_limit=500M
+max_input_time=300

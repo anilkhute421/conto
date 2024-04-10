@@ -1,0 +1,31 @@
+    //testing
+    public function tetstingWhatsappNotification()
+    {
+
+        // dd('anil');
+        $twilio = new \Twilio\Rest\Client(\Config::get('constants.TWILIO_AUTH_SID'), \Config::get('constants.TWILIO_AUTH_TOKEN'));
+        
+        // dd($maintanence_request_details->maintanence_request_name);
+        $body = "Dear"."\n"."i am second"."0%a"."third" ;
+        // $body = "Dear " .ucfirst($expert_name)  . ' please find maintanence request details: ';
+
+        try {
+            $twilio->messages->create("whatsapp:+919039989441",["from" => "whatsapp:".\Config::get('constants.TWILIO_WHATSAPP_FROM'), "body" => $body ]);
+
+        } catch (\Twilio\Exceptions\RestException $e) {
+            \Log::error('---------whatsappNotification------------------- ' . json_encode($e));
+        }
+    
+    }
+
+    Maintenance request status.
+    status should be as below 
+    //-     Request raised (1)
+    //-     Request assigned (2)
+    //-     Request completed (3)
+    //-     Request is on hold (4)
+    //-     Request canceled (5)
+
+
+    in TenantController put payment_type = 2 (2 means null) line no. 656
+   

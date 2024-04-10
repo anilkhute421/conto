@@ -1,0 +1,15 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class ContractModel extends Model
+{
+    use HasFactory;
+    protected $table = 'contracts_tables';
+
+    //status 0 expired, 1 active
+    
+}

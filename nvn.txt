@@ -1,0 +1,123 @@
+find and do according to below line
+
+
+php artisan db:seed --class=CmsSeeder
+-----------------------------------------
+
+07-01-2022
+--------------
+
+If admin deactivated the account of a PM company: then the below will happen
+
+1- all PM manager accounts related to this company will be deactivated and they should be logged out and when they want to login a message will pop up (account deactivated, contact admin at contolio@contolio.com )
+
+-----------------------------------------
+
+2 When admin deactivate a PM manager account (but company is still active ) then : pm manager will be logged out and a message will pop up (account deactivated, contact admin at contolio@contolio.com)
+
+In second scenario, other PM managers related to same company ID will still be active .. only the pm manager that got deactivated will not be able to login
+
+
+No affect on mobile app users .. they can still access with no issues if PM company deactivated .. only affect is that PM managers related to disabled company will not be able to access and use the system
+--------------------------
+
+SYNC
+avaliable_units.currency_id  === property_manager_companies.currency_id
+
+BuildingModel->pm_company_id ===> property_manager_companies->currency_id  ==>  currencies
+
+--------------------------------
+units is tenants_units
+
+----------------
+to FIX
+
+- export owner by PM
+
+
+---------------
+$currency_id = \DB::table('property_manager_companies')->where('id', $request->user()->pm_company_id)->value('currency_id');
+$query->currency_symbol = \DB::table('currencies')->where('id', $currency_id)->value('symbol');
+-----------------------
+
+--------------
+24-01-2022
+Contract
+
+But we need active/expired auto status
+
+If expiry date less than today the n expired
+
+If expiry date greater the. Today then active
+--------------------------
+PM may add multiple contract records fro the same unit
+
+on view contract page
+As one contract can have one unit linked to it only
+
+
+NOTES : comment / chat :  maintenance_request_id is chat id, unit_id is tenant, company id is pm
+
+- if tenant changed from edit unit, then tenant_id will be automatically update in maintance_requests table for that unit
+
+-
+
+================================
+
+in regards to filters, below should be applied:--------------------
+
+Maintenance Requests: status
+Building : active/inactive
+Unit Available : active/inactive
+Unit : active/inactive
+Owners : active/inactive
+All Tenants : multiple status
+Maintenance Experts : multiple Specialities
+Maintenance Expenses : multiple Expenses
+Contract : expired/active
+Payment  : Cheque/Manual
+Payment  : filter by payment status
+Maintenance Requests: Request for
+Contract : filter by expiry date (=, >, >=, <, <=)
+Payment  : filter by payment date (=, >, >=, <, <=)
+Maintenance Requests: date (=, >, >=, <, <=)
+Maintenance Expenses :  Date ((=, >, >=, <, <=))
+Maintenance Expenses : Amount ((=, >, >=, <, <=))
+-----------------------------------------------
+
+--------------------------------------------------
+
+// $has_seen = \DB::table('pm_notifications')
+                //     ->where('id', $row->id)
+                //     ->whereRaw('FIND_IN_SET(?,seen_by)', [$request->user()->id])
+                //     ->value('id');
+
+                // $row->has_seen = blank($has_seen) ? 0 : 1;
+++++++++++++++++++++++++++++++++++
+for push noti
+-------------------------------------
+contolio_userid
+single user
+----------------------------------------
+for all user
+contolio_admin_topic
++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++
+ "lcobucci/jwt",
+            "version": "3.3.3",
+---------------------------
+"name": "guzzlehttp/guzzle",
+            "version": "6.3.3",
+-----------------
+kreait/firebase-tokens
+
+1.11.0
+-----------------------
+kreait/firebase-php
+5.11.0
+++++++++++++++++++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++++++++++++
+
+crons - azure webjob on admin instance
+0 10 0 * * * // at 00:10 am
+0 20 0 * * * // at 00:20 am
